@@ -528,4 +528,8 @@ public class EnergyTransferNodeLogic extends BaseNodeLogic<IWalkingComponent<Int
         return panel;
     }
 
+    public String getInventoryName()
+    {
+        return MAX_CAPACITY == 1000000 ? "uie.gui.title.hyper_energy_transfer_node.name" : "uie.gui.title.energy_transfer_node.name";
+    }
 }

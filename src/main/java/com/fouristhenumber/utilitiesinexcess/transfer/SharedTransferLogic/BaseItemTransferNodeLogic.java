@@ -2,6 +2,18 @@ package com.fouristhenumber.utilitiesinexcess.transfer.SharedTransferLogic;
 
 import codechicken.lib.data.MCDataInput;
 import codechicken.lib.data.MCDataOutput;
+import com.cleanroommc.modularui.factory.PosGuiData;
+import com.cleanroommc.modularui.screen.ModularPanel;
+import com.cleanroommc.modularui.screen.UISettings;
+import com.cleanroommc.modularui.utils.item.IItemHandler;
+import com.cleanroommc.modularui.utils.item.InvWrapper;
+import com.cleanroommc.modularui.value.sync.PanelSyncManager;
+import com.cleanroommc.modularui.value.sync.StringSyncValue;
+import com.cleanroommc.modularui.widgets.slot.ItemSlot;
+import com.cleanroommc.modularui.widgets.slot.ModularSlot;
+import com.cleanroommc.modularui.widgets.slot.SlotGroup;
+import com.fouristhenumber.utilitiesinexcess.transfer.gui.NodeGui;
+import com.fouristhenumber.utilitiesinexcess.transfer.walk.ItemWalker;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,6 +24,7 @@ public abstract class BaseItemTransferNodeLogic<T extends IWalkingComponent<Item
 {
     protected ItemStack buffer;
     protected boolean isStackUpgrade = false;
+    public ItemWalker walker;
 
     public BaseItemTransferNodeLogic(T host) {
         super(host);
@@ -102,5 +115,19 @@ public abstract class BaseItemTransferNodeLogic<T extends IWalkingComponent<Item
     {
         super.readDesc(input);
         buffer = input.readItemStack();
+    }
+
+    @Override
+    public ModularPanel buildUI(PosGuiData data, PanelSyncManager syncManager, UISettings settings)
+    {
+        StringSyncValue searchLocationSyncer = new StringSyncValue(() -> "Search Location: " + walker.getLocationString());
+        SlotGroup bufferSlotGroup = new SlotGroup("transfer_node_buffer", 1);
+        IItemHandler bufferItemHandler = new InvWrapper(this);
+
+        return NodeGui.buildUI(upgrades, "transfer_node_upgrades", getInventoryName(), searchLocationSyncer,
+            () -> new ItemSlot().slot(
+                new ModularSlot(bufferItemHandler, 0)
+                    .slotGroup(bufferSlotGroup))
+        );
     }
 }

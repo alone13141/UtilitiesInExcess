@@ -41,7 +41,6 @@ public class FluidTransferNodeLogic extends BaseFluidTransferNodeLogic<IWalkingC
     private boolean init = false;
 
     IFluidHandler connectedTank;
-    public FluidWalker walker;
 
     public FluidTransferNodeLogic(IWalkingComponent<FluidStack> host) {
         super(host);
@@ -344,53 +343,8 @@ public class FluidTransferNodeLogic extends BaseFluidTransferNodeLogic<IWalkingC
         this.isWorldInteraction = true;
     }
 
-    // Note that because of the power of the fluid slot players can now put fluids in manually too!
-    // I see this as a win and doesn't break forward compat in any way.
-    @Override
-    public ModularPanel buildUI(PosGuiData data, PanelSyncManager syncManager, UISettings settings)
+    public String getInventoryName()
     {
-        StringSyncValue searchLocationSyncer = new StringSyncValue(() -> walker.getLocationString());
-        syncManager.syncValue("searchLocationSyncer", searchLocationSyncer);
-
-        SlotGroup upgradeSlotGroup = new SlotGroup("fluid_transfer_node_upgrades", 1);
-
-        ModularPanel panel = new ModularPanel("panel");
-        panel.bindPlayerInventory();
-
-        panel.child(
-            new ParentWidget<>().coverChildren()
-                .topRelAnchor(0, 1)
-                .child(
-                    IKey.str(StatCollector.translateToLocal(upgrades.getInventoryName()))
-                        .asWidget()
-                        .marginLeft(5)
-                        .marginRight(5)
-                        .marginTop(5)
-                        .marginBottom(-15)));
-
-        IItemHandler itemHandler = new InvWrapper(upgrades);
-
-        panel.child(
-            IKey.dynamic(() -> "Search Location: " + searchLocationSyncer.getStringValue())
-                .asWidget()
-                .marginTop(20)
-                .horizontalCenter()
-        );
-
-        Flow flow = Flow.row();
-        flow.pos(34,60).size(108,18);
-        for (int i = 0; i < upgrades.getSizeInventory(); i++)
-        {
-            flow.child(new ItemSlot().slot(new ModularSlot(itemHandler,i).slotGroup(upgradeSlotGroup).changeListener(upgrades)));
-        }
-        panel.child(flow);
-
-        panel.child(
-            new Grid().coverChildren()
-                .pos(79, 34)
-                .mapTo(1, 1, index -> new FluidSlot().syncHandler(buffer)));
-
-        return panel;
+        return "uie.gui.title.fluid_transfer_node.name";
     }
-
 }

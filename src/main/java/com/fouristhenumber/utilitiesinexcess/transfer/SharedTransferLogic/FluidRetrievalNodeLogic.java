@@ -16,6 +16,7 @@ import com.cleanroommc.modularui.widgets.slot.ItemSlot;
 import com.cleanroommc.modularui.widgets.slot.ModularSlot;
 import com.cleanroommc.modularui.widgets.slot.SlotGroup;
 import com.fouristhenumber.utilitiesinexcess.common.tileentities.transfer.TileEntityFluidRetrievalNode;
+import com.fouristhenumber.utilitiesinexcess.transfer.gui.NodeGui;
 import com.fouristhenumber.utilitiesinexcess.transfer.walk.FluidWalker;
 import com.fouristhenumber.utilitiesinexcess.transfer.walk.stepper.BFSStepper;
 import com.fouristhenumber.utilitiesinexcess.transfer.walk.stepper.DFSStepper;
@@ -35,7 +36,6 @@ import java.util.List;
 // I think it's just simpler design.
 public class FluidRetrievalNodeLogic extends BaseFluidTransferNodeLogic<IWalkingComponent<FluidStack>>
 {
-    public FluidWalker walker;
     IFluidHandler connectedTank;
 
     // Upgrades
@@ -229,51 +229,8 @@ public class FluidRetrievalNodeLogic extends BaseFluidTransferNodeLogic<IWalking
         this.maxDrainAmount = maxFluidAmount;
     }
 
-    // ======================================= UI =======================================
-    @Override
-    public ModularPanel buildUI(PosGuiData data, PanelSyncManager syncManager, UISettings settings)
+    public String getInventoryName()
     {
-        StringSyncValue searchLocationSyncer = new StringSyncValue(() -> walker.getLocationString());
-        syncManager.syncValue("searchLocationSyncer", searchLocationSyncer);
-
-        SlotGroup upgradeSlotGroup = new SlotGroup("fluid_retrieval_node_upgrades", 1);
-
-        ModularPanel panel = new ModularPanel("panel");
-        panel.bindPlayerInventory();
-
-        panel.child(
-            new ParentWidget<>().coverChildren()
-                .topRelAnchor(0, 1)
-                .child(
-                    IKey.str(StatCollector.translateToLocal(""))
-                        .asWidget()
-                        .marginLeft(5)
-                        .marginRight(5)
-                        .marginTop(5)
-                        .marginBottom(-15)));
-
-        IItemHandler itemHandler = new InvWrapper(upgrades);
-
-        panel.child(
-            IKey.dynamic(() -> "Search Location: " + searchLocationSyncer.getStringValue())
-                .asWidget()
-                .marginTop(20)
-                .horizontalCenter()
-        );
-
-        Flow flow = Flow.row();
-        flow.pos(34,60).size(108,18);
-        for (int i = 0; i < upgrades.getSizeInventory(); i++)
-        {
-            flow.child(new ItemSlot().slot(new ModularSlot(itemHandler,i).slotGroup(upgradeSlotGroup).changeListener(upgrades)));
-        }
-        panel.child(flow);
-
-        panel.child(
-            new Grid().coverChildren()
-                .pos(79, 34)
-                .mapTo(1, 1, index -> new FluidSlot().syncHandler(buffer)));
-
-        return panel;
+        return "uie.gui.title.fluid_retrieval_node.name";
     }
 }

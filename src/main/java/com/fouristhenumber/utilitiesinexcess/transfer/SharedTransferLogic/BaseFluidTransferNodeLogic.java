@@ -2,6 +2,14 @@ package com.fouristhenumber.utilitiesinexcess.transfer.SharedTransferLogic;
 
 import codechicken.lib.data.MCDataInput;
 import codechicken.lib.data.MCDataOutput;
+import com.cleanroommc.modularui.factory.PosGuiData;
+import com.cleanroommc.modularui.screen.ModularPanel;
+import com.cleanroommc.modularui.screen.UISettings;
+import com.cleanroommc.modularui.value.sync.PanelSyncManager;
+import com.cleanroommc.modularui.value.sync.StringSyncValue;
+import com.cleanroommc.modularui.widgets.slot.FluidSlot;
+import com.fouristhenumber.utilitiesinexcess.transfer.gui.NodeGui;
+import com.fouristhenumber.utilitiesinexcess.transfer.walk.FluidWalker;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
@@ -13,6 +21,7 @@ public abstract class BaseFluidTransferNodeLogic<T extends IWalkingComponent<Flu
     public int maxDrainAmount = DEFAULT_MAX_DRAIN_AMOUNT;
     public FluidTank buffer = new FluidTank(maxFluidAmount);
 
+    public FluidWalker walker;
     public BaseFluidTransferNodeLogic(T host) {
         super(host);
     }
@@ -50,6 +59,16 @@ public abstract class BaseFluidTransferNodeLogic<T extends IWalkingComponent<Flu
     {
         super.readDesc(input);
         buffer.setFluid(input.readFluidStack());
+    }
+
+    // ======================================= UI =======================================
+    @Override
+    public ModularPanel buildUI(PosGuiData data, PanelSyncManager syncManager, UISettings settings)
+    {
+        StringSyncValue searchLocationSyncer = new StringSyncValue(() -> "Search Location: " + walker.getLocationString());
+        return NodeGui.buildUI(upgrades, "transfer_node_upgrades", getInventoryName(), searchLocationSyncer,
+            () -> new FluidSlot().syncHandler(buffer)
+        );
     }
 
 }

@@ -39,6 +39,8 @@ public abstract class BaseNodeLogic<T extends IWalkingComponent<V>, V> extends N
         actionPerSecond += stack.stackSize;
     }
 
+    public abstract String getInventoryName();
+
     // Naturally, due to how this works it can create aliasing in the location of the walker.
     // It could look strange to users, but I'm not sure the best way to fix this.
     public int actionsThisTick() {

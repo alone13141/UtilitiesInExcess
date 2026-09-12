@@ -609,7 +609,12 @@ material.inverted.ability=Fully Inverted
 uie.gui.title.trash_can=Trash Can
 uie.gui.title.trash_can_fluid=Trash Can (Fluid)
 uie.gui.title.paint_roller=Select Color:
-
+uie.gui.title.item_transfer_node.name=Item Transfer Node
+uie.gui.title.item_retrieval_node.name=Item Retrieval Node
+uie.gui.title.fluid_transfer_node.name=Fluid Transfer Node
+uie.gui.title.fluid_retrieval_node.name=Fluid Retrieval Node 
+uie.gui.title.energy_transfer_node.name=Energy Transfer Node
+uie.gui.title.hyper_energy_transfer_node.name=Hyper Energy Transfer Node
 tile.transfer_pipe.name=Transfer Pipe
 
 tile.transfer_node.name=Transfer Node

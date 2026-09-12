@@ -247,11 +247,11 @@ public class UiEPartFactory implements MultiPartRegistry.IPartFactory2, MultiPar
                 // since that TE doesn't exist yet (see head of getOrConvertTile)
                 // Then, since doesTick == true it doesn't try to add it to the world as a tickable entity after so we just mimic what
                 // the world does on load, checking if it can update.
-                TileEntity maybeTE = world.getTileEntity(pos.x, pos.y, pos.z);
-                if (maybeTE instanceof TileMultipart maybeMultitile && maybeMultitile.canUpdate())
-                {
-                    world.addTileEntity(maybeMultitile);
-                }
+//                TileEntity maybeTE = world.getTileEntity(pos.x, pos.y, pos.z);
+//                if (maybeTE instanceof TileMultipart maybeMultitile && maybeMultitile.canUpdate())
+//                {
+//                    world.addTileEntity(maybeMultitile);
+//                }
 
                 world.playSoundEffect(
                     pos.x + 0.5,

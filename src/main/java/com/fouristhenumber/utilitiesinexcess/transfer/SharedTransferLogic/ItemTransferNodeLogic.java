@@ -18,6 +18,7 @@ import com.cleanroommc.modularui.widgets.slot.SlotGroup;
 import com.fouristhenumber.utilitiesinexcess.UtilitiesInExcess;
 import com.fouristhenumber.utilitiesinexcess.common.items.ItemUpgrade;
 import com.fouristhenumber.utilitiesinexcess.common.tileentities.transfer.TileEntityItemTransferNode;
+import com.fouristhenumber.utilitiesinexcess.transfer.gui.NodeGui;
 import com.fouristhenumber.utilitiesinexcess.transfer.upgrade.AdvancedFilterMode;
 import com.fouristhenumber.utilitiesinexcess.transfer.walk.ItemWalker;
 import com.fouristhenumber.utilitiesinexcess.transfer.walk.insertion.BaseInserter;
@@ -46,7 +47,6 @@ import static com.fouristhenumber.utilitiesinexcess.utils.InventoryUtils.getInve
 public class ItemTransferNodeLogic extends BaseItemTransferNodeLogic<IWalkingComponent<ItemStack>> implements IInventory
 {
     IInventory connectedInventory;
-    public ItemWalker walker;
 
     // Upgrades
     private boolean isCreative = false;
@@ -204,7 +204,7 @@ public class ItemTransferNodeLogic extends BaseItemTransferNodeLogic<IWalkingCom
     @Override
     public String getInventoryName()
     {
-        return "gui.title.item_transfer_node.name";
+        return "uie.gui.title.item_transfer_node.name";
     }
 
     @Override
@@ -309,61 +309,6 @@ public class ItemTransferNodeLogic extends BaseItemTransferNodeLogic<IWalkingCom
             AdvancedFilterMode.values()[getAdvFilterMode(advFilter)]::matches,
             ItemUpgrade.FilterMode.isInverted(advFilter)
         );
-    }
-
-    @Override
-    public ModularPanel buildUI(PosGuiData data, PanelSyncManager syncManager, UISettings settings)
-    {
-        StringSyncValue searchLocationSyncer = new StringSyncValue(() -> walker.getLocationString());
-        syncManager.syncValue("searchLocationSyncer", searchLocationSyncer);
-
-        SlotGroup bufferSlotGroup = new SlotGroup("transfer_node_buffer", 1);
-        SlotGroup upgradeSlotGroup = new SlotGroup("transfer_node_upgrades", 1);
-
-        ModularPanel panel = new ModularPanel("panel");
-        panel.bindPlayerInventory();
-
-        panel.child(
-            new ParentWidget<>().coverChildren()
-                .topRelAnchor(0, 1)
-                .child(
-                    IKey.str(StatCollector.translateToLocal(getInventoryName()))
-                        .asWidget()
-                        .marginLeft(5)
-                        .marginRight(5)
-                        .marginTop(5)
-                        .marginBottom(-15)));
-
-
-
-        panel.child(
-            IKey.dynamic(() -> "Search Location: " + searchLocationSyncer.getStringValue())
-                .asWidget()
-                .marginTop(20)
-                .horizontalCenter()
-            );
-
-        Flow flow = Flow.row();
-        flow.pos(34,60).size(108,18);
-
-        // upgrades
-        IItemHandler upgradeItemHandler = new InvWrapper(upgrades);
-        for (int i = 0; i < upgrades.getSizeInventory(); i++) // First slot is for buffer
-        {
-            flow.child(new ItemSlot().slot(new ModularSlot(upgradeItemHandler,i).slotGroup(upgradeSlotGroup).changeListener(upgrades)));
-        }
-
-        // buffer
-        IItemHandler bufferItemHandler = new InvWrapper(this);
-        panel.child(flow);
-        ModularSlot slot = new ModularSlot(bufferItemHandler, 0).slotGroup(bufferSlotGroup);
-
-        panel.child(
-            new Grid().coverChildren()
-                .pos(79, 34)
-                .mapTo(1, 1, index -> new ItemSlot().slot(slot)));
-
-        return panel;
     }
 
     public void updateSourceInventory()

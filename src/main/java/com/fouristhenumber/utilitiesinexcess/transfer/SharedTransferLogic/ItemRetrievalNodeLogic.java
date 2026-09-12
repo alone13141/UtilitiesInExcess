@@ -45,7 +45,6 @@ import static com.fouristhenumber.utilitiesinexcess.transfer.walk.insertion.Base
 
 public class ItemRetrievalNodeLogic extends BaseItemTransferNodeLogic<IWalkingComponent<ItemStack>> implements IInventory
 {
-    public ItemWalker walker;
     ItemStack buffer;
     IInventory connectedInventory;
 
@@ -58,7 +57,6 @@ public class ItemRetrievalNodeLogic extends BaseItemTransferNodeLogic<IWalkingCo
 
     public ItemRetrievalNodeLogic(IWalkingComponent<ItemStack> host) {
         super(host);
-        this.walker = new ItemWalker(host);
     }
 
     // Weird thing to note, retrieval node walkers just get locked out of filter pipes in all directions that are filtered.
@@ -317,7 +315,7 @@ public class ItemRetrievalNodeLogic extends BaseItemTransferNodeLogic<IWalkingCo
 
     @Override
     public String getInventoryName() {
-        return "";
+        return "uie.gui.title.item_retrieval_node.name";
     }
 
     @Override
@@ -415,59 +413,4 @@ public class ItemRetrievalNodeLogic extends BaseItemTransferNodeLogic<IWalkingCo
             ItemUpgrade.FilterMode.isInverted(advFilter)
         );
     }
-
-    @Override
-    public ModularPanel buildUI(PosGuiData data, PanelSyncManager syncManager, UISettings settings)
-    {
-        StringSyncValue searchLocationSyncer = new StringSyncValue(() -> walker.getLocationString());
-        syncManager.syncValue("searchLocationSyncer", searchLocationSyncer);
-
-        SlotGroup bufferSlotGroup = new SlotGroup("retrieval_node_buffer", 1);
-        SlotGroup upgradeSlotGroup = new SlotGroup("retrieval_node_upgrades", 1);
-
-        ModularPanel panel = new ModularPanel("panel");
-        panel.bindPlayerInventory();
-
-        panel.child(
-            new ParentWidget<>().coverChildren()
-                .topRelAnchor(0, 1)
-                .child(
-                    IKey.str(StatCollector.translateToLocal(getInventoryName()))
-                        .asWidget()
-                        .marginLeft(5)
-                        .marginRight(5)
-                        .marginTop(5)
-                        .marginBottom(-15)));
-
-
-        panel.child(
-            IKey.dynamic(() -> "Search Location: " + searchLocationSyncer.getStringValue())
-                .asWidget()
-                .marginTop(20)
-                .horizontalCenter()
-        );
-
-        Flow flow = Flow.row();
-        flow.pos(34,60).size(108,18);
-        // Upgrades
-        IItemHandler upgradeItemHandler = new InvWrapper(upgrades);
-
-        for (int i = 0; i < upgrades.getSizeInventory(); i++)
-        {
-            flow.child(new ItemSlot().slot(new ModularSlot(upgradeItemHandler,i).slotGroup(upgradeSlotGroup).changeListener(upgrades)));
-        }
-
-        panel.child(flow);
-        // Buffer
-        IItemHandler bufferItemHandler = new InvWrapper(this);
-        ModularSlot slot = new ModularSlot(bufferItemHandler, 0).slotGroup(bufferSlotGroup);
-
-        panel.child(
-            new Grid().coverChildren()
-                .pos(79, 34)
-                .mapTo(1, 1, index -> new ItemSlot().slot(slot)));
-
-        return panel;
-    }
-
 }
