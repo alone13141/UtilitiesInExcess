@@ -23,7 +23,7 @@ public enum ConversionRegistry
     EnergyNode("utilitiesinexcess:transfer_node_energy", BlockTransferNodeEnergy.class, ModBlocks.TRANSFER_NODE_ENERGY::get),
     Pipe("utilitiesinexcess:transfer_pipe", BlockPipe.class, ModBlocks.TRANSFER_PIPE::get);
 
-    private final String name;
+    public final String name;
     private final Class<? extends BlockTransferBase> block;
     private final Supplier<Block> blockSupplier;
 

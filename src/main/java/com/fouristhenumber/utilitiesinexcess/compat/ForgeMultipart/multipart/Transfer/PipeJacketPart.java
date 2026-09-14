@@ -51,7 +51,7 @@ public class PipeJacketPart extends UiEMultipart implements IMaterialPart, JPart
         };
 
     public Material material;
-    public static final String name = "pipe_jacket";
+    public static final String name = "ue_pipe_jacket";
     public static final int COVER_SLOT = 0;
 
     public PipeJacketPart(int materialId)
@@ -81,7 +81,7 @@ public class PipeJacketPart extends UiEMultipart implements IMaterialPart, JPart
 
     @Override
     public String getType() {
-        return "pipe_jacket";
+        return name;
     }
 
     @Override

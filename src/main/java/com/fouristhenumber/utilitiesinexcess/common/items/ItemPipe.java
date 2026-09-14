@@ -15,6 +15,6 @@ public class ItemPipe extends BaseTransferItemBlock
     @Override
     public String getUnlocalizedName(ItemStack stack)
     {
-        return PipeType.values()[stack.getItemDamage()].getName();
+        return "tile." + PipeType.values()[stack.getItemDamage()].getName();
     }
 }

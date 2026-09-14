@@ -14,6 +14,6 @@ public class ItemTransferNode extends BaseTransferItemBlock
     @Override
     public String getUnlocalizedName(ItemStack stack)
     {
-        return BlockTransferNode.TransferNodeType.values()[stack.getItemDamage()].getName();
+        return "tile." + BlockTransferNode.TransferNodeType.values()[stack.getItemDamage()].getName();
     }
 }

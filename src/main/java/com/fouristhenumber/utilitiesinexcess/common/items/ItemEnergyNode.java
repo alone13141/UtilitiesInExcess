@@ -15,6 +15,6 @@ public class ItemEnergyNode extends BaseTransferItemBlock
     @Override
     public String getUnlocalizedName(ItemStack stack)
     {
-        return BlockTransferNodeEnergy.EnergyNodeType.values()[stack.getItemDamage()].getName();
+        return "tile." + BlockTransferNodeEnergy.EnergyNodeType.values()[stack.getItemDamage()].getName();
     }
 }

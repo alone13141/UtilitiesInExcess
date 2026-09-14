@@ -96,28 +96,28 @@ public class UiEPartFactory implements MultiPartRegistry.IPartFactory2, MultiPar
 
     public static UiEMultipart createUEMultiPart(int meta, int material, String name) {
         return switch (name) {
-            case ("ue_fence") -> new FencePart(material, meta);
-            case ("ue_wall") -> new WallPart(material, meta);
-            case ("ue_sphere") -> new SpherePart(material);
+            case (FencePart.name) -> new FencePart(material, meta);
+            case (WallPart.name) -> new WallPart(material, meta);
+            case (SpherePart.name) -> new SpherePart(material);
             case ("utilitiesinexcess:retrieval_node") -> new RetrievalNodePart(meta);
             case ("utilitiesinexcess:transfer_node") -> new TransferNodePart(meta);
             case ("utilitiesinexcess:transfer_pipe") -> new PipePart(meta);
             case ("utilitiesinexcess:transfer_node_energy") -> new EnergyNodePart(meta);
-            case ("pipe_jacket") -> new PipeJacketPart(material);
+            case (PipeJacketPart.name) -> new PipeJacketPart(material);
             default -> null;
         };
     }
 
     public static UiEMultipart createUEMultiPart(MCDataInput packet, String name) {
         return switch (name) {
-            case ("ue_fence") -> new FencePart(packet);
-            case ("ue_wall") -> new WallPart(packet);
-            case ("ue_sphere") -> new SpherePart(packet);
+            case (FencePart.name) -> new FencePart(packet);
+            case (WallPart.name) -> new WallPart(packet);
+            case (SpherePart.name) -> new SpherePart(packet);
             case ("utilitiesinexcess:retrieval_node") -> new RetrievalNodePart(packet);
             case ("utilitiesinexcess:transfer_node") -> new TransferNodePart(packet);
             case ("utilitiesinexcess:transfer_pipe") -> new PipePart(packet);
             case ("utilitiesinexcess:transfer_node_energy") -> new EnergyNodePart(packet);
-            case ("pipe_jacket") -> new PipeJacketPart(packet);
+            case (PipeJacketPart.name) -> new PipeJacketPart(packet);
             default -> null;
         };
     }
