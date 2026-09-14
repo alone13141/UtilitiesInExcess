@@ -89,16 +89,6 @@ public class ItemTransferNodeLogic extends BaseItemTransferNodeLogic<IWalkingCom
                 importItems();
             }
 
-            if (buffer == null)
-            {
-                if (!this.isRoundRobin)
-                {
-                    walker.reset();
-                }
-
-                return;
-            }
-
             List<TargetResolver.Target<IInventory>> targets = walker.getValidTargets(host.getWorld());
             if (!targets.isEmpty()) {
                 BaseInserter inserter = walker.getInserter(host.getWorld());
@@ -116,6 +106,17 @@ public class ItemTransferNodeLogic extends BaseItemTransferNodeLogic<IWalkingCom
                     }
                 }
             }
+
+            if (buffer == null)
+            {
+                if (!this.isRoundRobin)
+                {
+                    walker.reset();
+                }
+
+                return;
+            }
+
             walker.step(host.getWorld());
         }
     }

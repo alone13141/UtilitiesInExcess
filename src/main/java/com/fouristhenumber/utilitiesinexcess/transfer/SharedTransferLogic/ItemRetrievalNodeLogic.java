@@ -57,6 +57,7 @@ public class ItemRetrievalNodeLogic extends BaseItemTransferNodeLogic<IWalkingCo
 
     public ItemRetrievalNodeLogic(IWalkingComponent<ItemStack> host) {
         super(host);
+        this.walker = new ItemWalker(host);
     }
 
     // Weird thing to note, retrieval node walkers just get locked out of filter pipes in all directions that are filtered.
