@@ -127,7 +127,7 @@ public abstract class BaseItemTransferNodeLogic<T extends IWalkingComponent<Item
         return NodeGui.buildUI(upgrades, "transfer_node_upgrades", getInventoryName(), searchLocationSyncer,
             () -> new ItemSlot().slot(
                 new ModularSlot(bufferItemHandler, 0)
-                    .slotGroup(bufferSlotGroup))
+                    .slotGroup(bufferSlotGroup)), syncManager
         );
     }
 }

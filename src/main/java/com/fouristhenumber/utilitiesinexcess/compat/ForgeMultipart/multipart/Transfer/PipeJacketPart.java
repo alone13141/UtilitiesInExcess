@@ -197,6 +197,10 @@ public class PipeJacketPart extends UiEMultipart implements IMaterialPart, JPart
 
     public void onPartChanged(TMultiPart unused)
     {
+        if (world().isRemote)
+        {
+            return;
+        }
         boolean shouldDrop = true;
         for (TMultiPart part : tile().jPartList())
         {

@@ -4,6 +4,7 @@ import com.cleanroommc.modularui.api.drawable.IKey;
 import com.cleanroommc.modularui.screen.ModularPanel;
 import com.cleanroommc.modularui.utils.item.IItemHandler;
 import com.cleanroommc.modularui.utils.item.InvWrapper;
+import com.cleanroommc.modularui.value.sync.PanelSyncManager;
 import com.cleanroommc.modularui.value.sync.StringSyncValue;
 import com.cleanroommc.modularui.widget.ParentWidget;
 import com.cleanroommc.modularui.widget.Widget;
@@ -24,8 +25,11 @@ public class NodeGui
         String upgradeSlotGroupName,
         String title,
         StringSyncValue searchText,
-        Supplier<Widget> bufferSlotBuilder)
+        Supplier<Widget> bufferSlotBuilder,
+        PanelSyncManager syncManager)
     {
+        syncManager.syncValue("searchLocationSyncer", searchText);
+
         SlotGroup upgradeSlotGroup = new SlotGroup(upgradeSlotGroupName, 1);
 
         ModularPanel panel = new ModularPanel("panel");

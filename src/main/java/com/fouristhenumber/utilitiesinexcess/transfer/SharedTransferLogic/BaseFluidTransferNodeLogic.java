@@ -67,7 +67,7 @@ public abstract class BaseFluidTransferNodeLogic<T extends IWalkingComponent<Flu
     {
         StringSyncValue searchLocationSyncer = new StringSyncValue(() -> "Search Location: " + walker.getLocationString());
         return NodeGui.buildUI(upgrades, "transfer_node_upgrades", getInventoryName(), searchLocationSyncer,
-            () -> new FluidSlot().syncHandler(buffer)
+            () -> new FluidSlot().syncHandler(buffer), syncManager
         );
     }
 
