@@ -55,6 +55,7 @@ public class RandomStepper extends StepStrategy
 
     @Override
     public BlockPos reset(BlockPos walkerPos, IWalkingComponent walkingComponent) {
+        this.fromDirection = ForgeDirection.UNKNOWN;
         return walkerPos.set(walkingComponent.getX(), walkingComponent.getY(), walkingComponent.getZ());
     }
 }
