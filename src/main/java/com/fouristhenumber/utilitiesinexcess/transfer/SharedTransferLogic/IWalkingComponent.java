@@ -1,6 +1,6 @@
 package com.fouristhenumber.utilitiesinexcess.transfer.SharedTransferLogic;
 
-public interface IWalkingComponent<T> extends INodeLogicHost
+public interface IWalkingComponent extends INodeLogicHost
 {
-    T getWalkingObject();
+    Object getWalkingObject();
 }

@@ -89,7 +89,7 @@ public class EnergyNodePart extends BaseNodePart
     }
 
     @Override
-    public int validWalkDirections(IBlockAccess world, int x, int y, int z, ForgeDirection fromDirection, IWalkingComponent<?> walkingComponent)
+    public int validWalkDirections(IBlockAccess world, int x, int y, int z, ForgeDirection fromDirection, IWalkingComponent walkingComponent)
     {
         int mask = 0b111111;
         if (fromDirection != ForgeDirection.UNKNOWN)

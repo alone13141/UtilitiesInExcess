@@ -15,7 +15,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public abstract class BaseNodeLogic<T extends IWalkingComponent<V>, V> extends NetworkLogic<T> implements IUpgradeable, ITickableLogic, IWalkingLogic<V>
+public abstract class BaseNodeLogic<T extends IWalkingComponent> extends NetworkLogic<T> implements IUpgradeable, ITickableLogic, IWalkingLogic
 {
     public static final int DEFAULT_STEPS_PER_SECOND = 2;
     protected int actionPerSecond = DEFAULT_STEPS_PER_SECOND;
@@ -27,6 +27,11 @@ public abstract class BaseNodeLogic<T extends IWalkingComponent<V>, V> extends N
     public BaseNodeLogic(T host) {
         super(host);
         this.upgrades = new UpgradeInventory(6, this);
+    }
+
+    public void dropContents()
+    {
+
     }
 
     @Override

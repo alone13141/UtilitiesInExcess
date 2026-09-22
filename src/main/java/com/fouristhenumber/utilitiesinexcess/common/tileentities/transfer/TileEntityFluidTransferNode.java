@@ -1,9 +1,10 @@
 package com.fouristhenumber.utilitiesinexcess.common.tileentities.transfer;
 
+import com.fouristhenumber.utilitiesinexcess.transfer.SharedTransferLogic.FluidRetrievalNodeLogic;
 import com.fouristhenumber.utilitiesinexcess.transfer.SharedTransferLogic.FluidTransferNodeLogic;
 import net.minecraftforge.fluids.FluidStack;
 
-public class TileEntityFluidTransferNode extends TileEntityTransferNodeBase<FluidTransferNodeLogic, FluidStack>
+public class TileEntityFluidTransferNode extends TileEntityTransferNodeBase<FluidTransferNodeLogic>
 {
     @Override
     protected FluidTransferNodeLogic getLogic()

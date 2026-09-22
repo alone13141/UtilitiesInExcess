@@ -8,13 +8,13 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public abstract class WalkerBase<T, E>
+public abstract class WalkerBase<T>
 {
-    protected IWalkingComponent<E> walkingComponent;
+    protected IWalkingComponent walkingComponent;
     BlockPos walkerPos;
     protected StepStrategy stepper;
 
-    WalkerBase(IWalkingComponent<E> walkingComponent)
+    WalkerBase(IWalkingComponent walkingComponent)
     {
         this.walkingComponent = walkingComponent;
     }
@@ -51,10 +51,4 @@ public abstract class WalkerBase<T, E>
     public abstract void reset();
 
     public abstract List<TargetResolver.Target<T>> getValidTargets(World world);
-
-    // TODO Double check that fluids aren't affected by rationing pipes
-    public int getInsertLimit(World world, int x, int y, int z)
-    {
-        return -1;
-    }
 }

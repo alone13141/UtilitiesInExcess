@@ -18,7 +18,7 @@ public class EnergyTargetResolver implements TargetResolver<IEnergyConnection> {
     {}
 
     @Override
-    public List<Target<IEnergyConnection>> getValidTargets(World world, BlockPos walkerPos, IWalkingComponent<?> walking, ForgeDirection fromDir)
+    public List<Target<IEnergyConnection>> getValidTargets(World world, BlockPos walkerPos, IWalkingComponent walking, ForgeDirection fromDir)
     {
         List<Target<IEnergyConnection>> validTargets = new ArrayList<>();
         List<IConnectable> connectables = IConnectable.getConnectables(world, walkerPos.x, walkerPos.y, walkerPos.z);

@@ -254,7 +254,7 @@ public class BlockPipe extends BlockTransferBase
     }
 
     @Override
-    public int validWalkDirections(IBlockAccess world, int x, int y, int z, ForgeDirection fromDirection, IWalkingComponent<?> walkingComponent)
+    public int validWalkDirections(IBlockAccess world, int x, int y, int z, ForgeDirection fromDirection, IWalkingComponent walkingComponent)
     {
         return PipeType.values()[world.getBlockMetadata(x, y, z)].validWalkDirections(world, x, y, z, fromDirection, walkingComponent);
     }

@@ -14,11 +14,11 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class ItemWalker extends WalkerBase<IInventory, ItemStack>
+public class ItemWalker extends WalkerBase<IInventory>
 {
     TargetResolver<IInventory> targeter;
 
-    public ItemWalker(IWalkingComponent<ItemStack> originComponent)
+    public ItemWalker(IWalkingComponent originComponent)
     {
         super(originComponent);
         stepper = new RandomStepper();

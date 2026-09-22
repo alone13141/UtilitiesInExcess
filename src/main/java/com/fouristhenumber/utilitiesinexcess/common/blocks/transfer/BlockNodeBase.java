@@ -1,6 +1,7 @@
 package com.fouristhenumber.utilitiesinexcess.common.blocks.transfer;
 
 
+import com.fouristhenumber.utilitiesinexcess.common.tileentities.transfer.TileEntityTransferNodeBase;
 import com.fouristhenumber.utilitiesinexcess.transfer.SharedTransferLogic.IWalkingComponent;
 import com.fouristhenumber.utilitiesinexcess.transfer.collision.NodeCollision;
 import com.fouristhenumber.utilitiesinexcess.transfer.collision.PipeCollision;
@@ -12,6 +13,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -215,7 +218,7 @@ public abstract class BlockNodeBase extends BlockTransferBase // implements IBlo
     }
 
     @Override
-    public int validWalkDirections(IBlockAccess world, int x, int y, int z, ForgeDirection fromDirection, IWalkingComponent<?> walkingComponent)
+    public int validWalkDirections(IBlockAccess world, int x, int y, int z, ForgeDirection fromDirection, IWalkingComponent walkingComponent)
     {
         int mask = 0b111111;
         int facing = getFacingOrdinal(world.getBlockMetadata(x, y, z));
@@ -287,5 +290,18 @@ public abstract class BlockNodeBase extends BlockTransferBase // implements IBlo
     public int damageDropped(int metadata)
     {
         return getType(metadata);
+    }
+
+    @Override
+    public void breakBlock(World world, int x, int y, int z, Block block, int metadata)
+    {
+        TileEntity te = world.getTileEntity(x, y, z);
+
+        if (te instanceof TileEntityTransferNodeBase transferTE)
+        {
+            transferTE.dropInventoryContents();
+        }
+
+        super.breakBlock(world, x, y, z, block, metadata);
     }
 }

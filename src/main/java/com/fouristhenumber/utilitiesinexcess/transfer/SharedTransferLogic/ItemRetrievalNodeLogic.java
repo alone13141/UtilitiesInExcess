@@ -43,7 +43,7 @@ import static com.fouristhenumber.utilitiesinexcess.transfer.SharedTransferLogic
 import static com.fouristhenumber.utilitiesinexcess.transfer.upgrade.AdvancedFilterMode.getAdvFilterMode;
 import static com.fouristhenumber.utilitiesinexcess.transfer.walk.insertion.BaseInserter.canStacksMerge;
 
-public class ItemRetrievalNodeLogic extends BaseItemTransferNodeLogic<IWalkingComponent<ItemStack>> implements IInventory
+public class ItemRetrievalNodeLogic extends BaseItemTransferNodeLogic<IWalkingComponent> implements IInventory
 {
     ItemStack buffer;
     IInventory connectedInventory;
@@ -55,7 +55,7 @@ public class ItemRetrievalNodeLogic extends BaseItemTransferNodeLogic<IWalkingCo
 
     private ItemStack pullingItem;
 
-    public ItemRetrievalNodeLogic(IWalkingComponent<ItemStack> host) {
+    public ItemRetrievalNodeLogic(IWalkingComponent host) {
         super(host);
         this.walker = new ItemWalker(host);
     }

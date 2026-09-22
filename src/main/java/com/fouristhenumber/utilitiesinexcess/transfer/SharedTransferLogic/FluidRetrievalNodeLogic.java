@@ -1,31 +1,14 @@
 package com.fouristhenumber.utilitiesinexcess.transfer.SharedTransferLogic;
 
-import com.cleanroommc.modularui.api.drawable.IKey;
-import com.cleanroommc.modularui.factory.PosGuiData;
-import com.cleanroommc.modularui.screen.ModularPanel;
-import com.cleanroommc.modularui.screen.UISettings;
-import com.cleanroommc.modularui.utils.item.IItemHandler;
-import com.cleanroommc.modularui.utils.item.InvWrapper;
-import com.cleanroommc.modularui.value.sync.PanelSyncManager;
-import com.cleanroommc.modularui.value.sync.StringSyncValue;
-import com.cleanroommc.modularui.widget.ParentWidget;
-import com.cleanroommc.modularui.widgets.layout.Flow;
-import com.cleanroommc.modularui.widgets.layout.Grid;
-import com.cleanroommc.modularui.widgets.slot.FluidSlot;
-import com.cleanroommc.modularui.widgets.slot.ItemSlot;
-import com.cleanroommc.modularui.widgets.slot.ModularSlot;
-import com.cleanroommc.modularui.widgets.slot.SlotGroup;
-import com.fouristhenumber.utilitiesinexcess.common.tileentities.transfer.TileEntityFluidRetrievalNode;
-import com.fouristhenumber.utilitiesinexcess.transfer.gui.NodeGui;
 import com.fouristhenumber.utilitiesinexcess.transfer.walk.FluidWalker;
 import com.fouristhenumber.utilitiesinexcess.transfer.walk.stepper.BFSStepper;
 import com.fouristhenumber.utilitiesinexcess.transfer.walk.stepper.DFSStepper;
 import com.fouristhenumber.utilitiesinexcess.transfer.walk.stepper.RandomStepper;
 import com.fouristhenumber.utilitiesinexcess.transfer.walk.targeting.TargetResolver;
+
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.StatCollector;
+
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
@@ -34,7 +17,7 @@ import java.util.List;
 
 // This class doesn't really even need to be a IInventory because of composition on FluidTank + UpgradeInventory.
 // I think it's just simpler design.
-public class FluidRetrievalNodeLogic extends BaseFluidTransferNodeLogic<IWalkingComponent<FluidStack>>
+public class FluidRetrievalNodeLogic extends BaseFluidTransferNodeLogic<IWalkingComponent>
 {
     IFluidHandler connectedTank;
 
@@ -42,7 +25,7 @@ public class FluidRetrievalNodeLogic extends BaseFluidTransferNodeLogic<IWalking
     private boolean isRoundRobin = false;
     private boolean init = false;
 
-    public FluidRetrievalNodeLogic(IWalkingComponent<FluidStack> host)
+    public FluidRetrievalNodeLogic(IWalkingComponent host)
     {
         super(host);
         this.walker = new FluidWalker(host);

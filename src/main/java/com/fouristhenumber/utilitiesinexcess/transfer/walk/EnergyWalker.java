@@ -12,11 +12,11 @@ import net.minecraft.world.World;
 import java.util.List;
 
 // Pretty sure these are totally unaffected by search type upgrades. For round-robin, dfs, and bfs.
-public class EnergyWalker extends WalkerBase<IEnergyConnection, Integer>
+public class EnergyWalker extends WalkerBase<IEnergyConnection>
 {
     TargetResolver<IEnergyConnection> targeter;
 
-    public EnergyWalker(IWalkingComponent<Integer> walkingComponent) {
+    public EnergyWalker(IWalkingComponent walkingComponent) {
         super(walkingComponent);
         stepper = new BFSStepper(); // Energy walkers are default BFS
         targeter = new EnergyTargetResolver();

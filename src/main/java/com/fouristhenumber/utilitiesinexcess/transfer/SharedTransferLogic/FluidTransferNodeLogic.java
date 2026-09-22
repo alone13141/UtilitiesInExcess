@@ -15,7 +15,7 @@ import net.minecraftforge.fluids.*;
 
 import java.util.List;
 
-public class FluidTransferNodeLogic extends BaseFluidTransferNodeLogic<IWalkingComponent<FluidStack>>
+public class FluidTransferNodeLogic extends BaseFluidTransferNodeLogic<IWalkingComponent>
 {
     // Upgrades
     private boolean isCreative = false;
@@ -24,7 +24,7 @@ public class FluidTransferNodeLogic extends BaseFluidTransferNodeLogic<IWalkingC
 
     IFluidHandler connectedTank;
 
-    public FluidTransferNodeLogic(IWalkingComponent<FluidStack> host) {
+    public FluidTransferNodeLogic(IWalkingComponent host) {
         super(host);
         walker = new FluidWalker(host);
     }

@@ -10,11 +10,11 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 import java.util.List;
 
-public class FluidWalker extends WalkerBase<IFluidHandler, FluidStack>
+public class FluidWalker extends WalkerBase<IFluidHandler>
 {
     TargetResolver<IFluidHandler> targeter;
 
-    public FluidWalker(IWalkingComponent<FluidStack> walkingComponent) {
+    public FluidWalker(IWalkingComponent walkingComponent) {
         super(walkingComponent);
         stepper = new RandomStepper();
         targeter = new FluidTargetResolver();

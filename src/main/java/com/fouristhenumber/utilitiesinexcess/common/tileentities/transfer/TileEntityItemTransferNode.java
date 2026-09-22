@@ -3,7 +3,7 @@ package com.fouristhenumber.utilitiesinexcess.common.tileentities.transfer;
 import com.fouristhenumber.utilitiesinexcess.transfer.SharedTransferLogic.ItemTransferNodeLogic;
 import net.minecraft.item.ItemStack;
 
-public class TileEntityItemTransferNode extends TileEntityTransferNodeBase<ItemTransferNodeLogic, ItemStack>
+public class TileEntityItemTransferNode extends TileEntityTransferNodeBase<ItemTransferNodeLogic>
 {
     @Override
     protected ItemTransferNodeLogic getLogic()

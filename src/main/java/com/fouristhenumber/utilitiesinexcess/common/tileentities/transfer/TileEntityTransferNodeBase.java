@@ -16,9 +16,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public abstract class TileEntityTransferNodeBase<T extends BaseNodeLogic<? extends ITransferNetworkComponent, V>, V> extends TileEntityNetworkComponentBase<T>
-    implements INodeLogicHost, IGuiHolder<PosGuiData>, IWalkingComponent<V>
+public abstract class TileEntityTransferNodeBase<T extends BaseNodeLogic> extends TileEntityNetworkComponentBase
+    implements INodeLogicHost, IGuiHolder<PosGuiData>, IWalkingComponent
 {
+    T logic;
+
+    protected abstract T getLogic();
+
     @Override
     public void updateEntity()
     {
@@ -40,7 +44,7 @@ public abstract class TileEntityTransferNodeBase<T extends BaseNodeLogic<? exten
     }
 
     @Override
-    public V getWalkingObject()
+    public Object getWalkingObject()
     {
         return getLogic().getWalkingObject();
     }
@@ -60,5 +64,10 @@ public abstract class TileEntityTransferNodeBase<T extends BaseNodeLogic<? exten
     public ForgeDirection getFacing()
     {
         return BlockNodeBase.getFacing(worldObj.getBlockMetadata(xCoord, yCoord, zCoord));
+    }
+
+    public void dropInventoryContents()
+    {
+        getLogic().dropContents();
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public interface TargetResolver<T>
 {
 
-    List<Target<T>> getValidTargets(World world, BlockPos walkerPos, IWalkingComponent<?> walking, ForgeDirection fromDir);
+    List<Target<T>> getValidTargets(World world, BlockPos walkerPos, IWalkingComponent walking, ForgeDirection fromDir);
 
     class Target<T>
     {

@@ -22,7 +22,7 @@ public class ItemTargetResolver implements TargetResolver<IInventory> {
     }
 
     @Override
-    public List<Target<IInventory>> getValidTargets(World world, BlockPos walkerPos, IWalkingComponent<?> walking, ForgeDirection fromDir)
+    public List<Target<IInventory>> getValidTargets(World world, BlockPos walkerPos, IWalkingComponent walking, ForgeDirection fromDir)
     {
         List<Target<IInventory>> validTargets = new ArrayList<>();
         List<IConnectable> connectables = IConnectable.getConnectables(world, walkerPos.x, walkerPos.y, walkerPos.z);

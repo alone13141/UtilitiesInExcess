@@ -5,10 +5,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 
-public abstract class TileEntityNetworkComponentBase<T extends NetworkLogic<? extends ITransferNetworkComponent>> extends TileEntity implements ITransferNetworkComponent
+public abstract class TileEntityNetworkComponentBase extends TileEntity implements ITransferNetworkComponent
 {
-    protected T logic;
-
     @Override
     public World getWorld() {
         return this.worldObj;
@@ -34,11 +32,11 @@ public abstract class TileEntityNetworkComponentBase<T extends NetworkLogic<? ex
     {
         return worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord);
     }
+
     @Override
     public void markHostDirty()
     {
         this.markDirty();
     }
 
-    protected abstract T getLogic();
 }

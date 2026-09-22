@@ -121,7 +121,7 @@ public class PipePart extends LogicComponentBasePart
     }
 
     @Override
-    public int validWalkDirections(IBlockAccess world, int x, int y, int z, ForgeDirection fromDirection, IWalkingComponent<?> walkingComponent)
+    public int validWalkDirections(IBlockAccess world, int x, int y, int z, ForgeDirection fromDirection, IWalkingComponent walkingComponent)
     {
         int mask = PipeType.values()[meta].validWalkDirections(world, x, y, z, fromDirection, walkingComponent);
         for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)

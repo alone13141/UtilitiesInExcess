@@ -43,7 +43,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.List;
 
-public class EnergyTransferNodeLogic extends BaseNodeLogic<IWalkingComponent<Integer>, Integer> implements IEnergyHandler
+public class EnergyTransferNodeLogic extends BaseNodeLogic<IWalkingComponent> implements IEnergyHandler
 {
     public EnergyWalker walker;
 
@@ -66,7 +66,7 @@ public class EnergyTransferNodeLogic extends BaseNodeLogic<IWalkingComponent<Int
     private boolean isCreative = false;
     private final Object2IntOpenHashMap<String> pushingFrequencies = new Object2IntOpenHashMap<>();
 
-    public EnergyTransferNodeLogic(IWalkingComponent<Integer> host)
+    public EnergyTransferNodeLogic(IWalkingComponent host)
     {
         super(host);
         walker = new EnergyWalker(host);

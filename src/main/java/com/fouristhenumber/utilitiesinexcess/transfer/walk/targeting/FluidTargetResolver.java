@@ -1,10 +1,8 @@
 package com.fouristhenumber.utilitiesinexcess.transfer.walk.targeting;
 
-import com.fouristhenumber.utilitiesinexcess.common.blocks.transfer.BlockTransferBase;
 import com.fouristhenumber.utilitiesinexcess.common.blocks.transfer.IConnectable;
 import com.fouristhenumber.utilitiesinexcess.transfer.SharedTransferLogic.IWalkingComponent;
 import com.gtnewhorizon.gtnhlib.blockpos.BlockPos;
-import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.IFluidHandler;
@@ -19,7 +17,7 @@ public class FluidTargetResolver implements TargetResolver<IFluidHandler>
     {}
 
     @Override
-    public List<Target<IFluidHandler>> getValidTargets(World world, BlockPos walkerPos, IWalkingComponent<?> walking, ForgeDirection fromDir) {
+    public List<Target<IFluidHandler>> getValidTargets(World world, BlockPos walkerPos, IWalkingComponent walking, ForgeDirection fromDir) {
         List<Target<IFluidHandler>> validTargets = new ArrayList<>();
 
         List<IConnectable> connectables = IConnectable.getConnectables(world, walkerPos.x, walkerPos.y, walkerPos.z);

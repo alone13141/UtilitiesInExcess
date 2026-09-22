@@ -13,9 +13,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityFilterPipe extends TileEntityNetworkComponentBase<FilterPipeLogic>
+public class TileEntityFilterPipe extends TileEntityNetworkComponentBase
     implements IGuiHolder<PosGuiData>
 {
+    private FilterPipeLogic logic;
+
+    protected FilterPipeLogic getLogic()
+    {
+        if (logic == null)
+        {
+            logic = new FilterPipeLogic(this);
+        }
+        return logic;
+    }
+
     public TileEntityFilterPipe() {}
 
     public int getValidMask(ForgeDirection fromDirection, ItemStack stack)
@@ -49,13 +60,4 @@ public class TileEntityFilterPipe extends TileEntityNetworkComponentBase<FilterP
         return getLogic().createScreen(data, mainPanel);
     }
 
-    @Override
-    protected FilterPipeLogic getLogic()
-    {
-        if (logic == null)
-        {
-            logic = new FilterPipeLogic(this);
-        }
-        return logic;
-    }
 }

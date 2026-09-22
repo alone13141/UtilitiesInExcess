@@ -18,9 +18,9 @@ public interface IConnectable
 {
     // Given that all directions have a pipe to go from, what directions can we walk from this network object.
     // Why do we have this on getConnectionMask? Because this function is walker context aware.
-    int validWalkDirections(IBlockAccess world, int x, int y, int z, ForgeDirection fromDirection, IWalkingComponent<?> walkingComponent);
+    int validWalkDirections(IBlockAccess world, int x, int y, int z, ForgeDirection fromDirection, IWalkingComponent walkingComponent);
 
-    static int validWalkDirections(List<IConnectable> connectables, IBlockAccess world, int x, int y, int z, ForgeDirection fromDirection, IWalkingComponent<?> walkingComponent)
+    static int validWalkDirections(List<IConnectable> connectables, IBlockAccess world, int x, int y, int z, ForgeDirection fromDirection, IWalkingComponent walkingComponent)
     {
         int mask = 0b111111;
         for (IConnectable connectable : connectables)

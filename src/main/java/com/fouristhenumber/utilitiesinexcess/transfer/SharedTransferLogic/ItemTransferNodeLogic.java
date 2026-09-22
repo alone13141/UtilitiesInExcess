@@ -44,7 +44,7 @@ import static com.fouristhenumber.utilitiesinexcess.transfer.SharedTransferLogic
 import static com.fouristhenumber.utilitiesinexcess.transfer.upgrade.AdvancedFilterMode.getAdvFilterMode;
 import static com.fouristhenumber.utilitiesinexcess.utils.InventoryUtils.getInventory;
 
-public class ItemTransferNodeLogic extends BaseItemTransferNodeLogic<IWalkingComponent<ItemStack>> implements IInventory
+public class ItemTransferNodeLogic extends BaseItemTransferNodeLogic<IWalkingComponent> implements IInventory
 {
     IInventory connectedInventory;
 
@@ -54,7 +54,7 @@ public class ItemTransferNodeLogic extends BaseItemTransferNodeLogic<IWalkingCom
     private boolean init = false;
     private boolean isRoundRobin = false;
 
-    public ItemTransferNodeLogic(IWalkingComponent<ItemStack> host)
+    public ItemTransferNodeLogic(IWalkingComponent host)
     {
         super(host);
         this.walker = new ItemWalker(host);

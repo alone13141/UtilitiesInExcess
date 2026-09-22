@@ -62,7 +62,7 @@ public abstract class BaseNodePart extends LogicComponentBasePart
     {
         NetworkLogic<?> logic = getLogic();
 
-        if (logic instanceof IWalkingLogic<?> walking) {
+        if (logic instanceof IWalkingLogic walking) {
             return walking.getWalkingObject();
         }
         return null;
@@ -83,7 +83,7 @@ public abstract class BaseNodePart extends LogicComponentBasePart
     }
 
     @Override
-    public int validWalkDirections(IBlockAccess world, int x, int y, int z, ForgeDirection fromDirection, IWalkingComponent<?> walkingComponent)
+    public int validWalkDirections(IBlockAccess world, int x, int y, int z, ForgeDirection fromDirection, IWalkingComponent walkingComponent)
     {
         int mask = 0b111111;
         int facing = getFacingOrdinal(meta);

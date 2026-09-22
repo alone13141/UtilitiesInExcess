@@ -20,7 +20,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import static com.fouristhenumber.utilitiesinexcess.transfer.walk.insertion.BaseInserter.canStacksMerge;
 
-public abstract class BaseItemTransferNodeLogic<T extends IWalkingComponent<ItemStack>> extends BaseNodeLogic<T, ItemStack> implements IInventory
+public abstract class BaseItemTransferNodeLogic<T extends IWalkingComponent> extends BaseNodeLogic<T> implements IInventory
 {
     protected ItemStack buffer;
     protected boolean isStackUpgrade = false;
