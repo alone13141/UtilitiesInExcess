@@ -17,14 +17,19 @@ import com.fouristhenumber.utilitiesinexcess.transfer.walk.ItemWalker;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import static com.fouristhenumber.utilitiesinexcess.transfer.walk.insertion.BaseInserter.canStacksMerge;
+import static com.fouristhenumber.utilitiesinexcess.utils.InventoryUtils.dropStack;
+import static com.fouristhenumber.utilitiesinexcess.utils.InventoryUtils.getInventory;
 
 public abstract class BaseItemTransferNodeLogic<T extends IWalkingComponent> extends BaseNodeLogic<T> implements IInventory
 {
     protected ItemStack buffer;
     protected boolean isStackUpgrade = false;
     public ItemWalker walker;
+    protected IInventory connectedInventory;
 
     public BaseItemTransferNodeLogic(T host) {
         super(host);
@@ -118,6 +123,17 @@ public abstract class BaseItemTransferNodeLogic<T extends IWalkingComponent> ext
     }
 
     @Override
+    public void dropContents(World world, int x, int y, int z)
+    {
+        super.dropContents(world, x, y, z);
+        if (buffer == null || buffer.stackSize <= 0)
+        {
+            return;
+        }
+        dropStack(world, x, y, z, buffer);
+    }
+
+    @Override
     public ModularPanel buildUI(PosGuiData data, PanelSyncManager syncManager, UISettings settings)
     {
         StringSyncValue searchLocationSyncer = new StringSyncValue(() -> "Search Location: " + walker.getLocationString());
@@ -129,5 +145,11 @@ public abstract class BaseItemTransferNodeLogic<T extends IWalkingComponent> ext
                 new ModularSlot(bufferItemHandler, 0)
                     .slotGroup(bufferSlotGroup)), syncManager
         );
+    }
+
+    public void updateSourceInventory()
+    {
+        ForgeDirection facing = host.getFacing();
+        connectedInventory = getInventory(host.getWorld(), host.getX() + facing.offsetX, host.getY() + facing.offsetY, host.getZ() + facing.offsetZ);
     }
 }

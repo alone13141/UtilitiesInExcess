@@ -2,6 +2,7 @@ package com.fouristhenumber.utilitiesinexcess.transfer.SharedTransferLogic;
 
 import codechicken.lib.data.MCDataInput;
 import codechicken.lib.data.MCDataOutput;
+import cofh.lib.util.helpers.InventoryHelper;
 import com.cleanroommc.modularui.factory.PosGuiData;
 import com.cleanroommc.modularui.screen.ModularPanel;
 import com.cleanroommc.modularui.screen.ModularScreen;
@@ -14,6 +15,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public abstract class BaseNodeLogic<T extends IWalkingComponent> extends NetworkLogic<T> implements IUpgradeable, ITickableLogic, IWalkingLogic
 {
@@ -23,15 +25,14 @@ public abstract class BaseNodeLogic<T extends IWalkingComponent> extends Network
 
     private float progress = 0f;
 
-
     public BaseNodeLogic(T host) {
         super(host);
         this.upgrades = new UpgradeInventory(6, this);
     }
 
-    public void dropContents()
+    public void dropContents(World world, int x, int y, int z)
     {
-
+        this.upgrades.dropContents(world, x, y, z);
     }
 
     @Override

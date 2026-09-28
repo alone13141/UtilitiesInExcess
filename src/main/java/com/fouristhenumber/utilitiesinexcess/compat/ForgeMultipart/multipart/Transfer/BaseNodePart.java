@@ -183,10 +183,4 @@ public abstract class BaseNodePart extends LogicComponentBasePart
     {
         return new ItemStack(Item.getItemFromBlock(getBlock()), 1, BlockNodeBase.getType(meta));
     }
-
-    @Override
-    public Iterable<ItemStack> getDrops()
-    {
-        return Collections.singletonList(new ItemStack(Item.getItemFromBlock(getBlock()), 1, BlockNodeBase.getType(meta)));
-    }
 }

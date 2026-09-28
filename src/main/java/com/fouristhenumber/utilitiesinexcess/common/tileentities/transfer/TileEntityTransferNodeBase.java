@@ -68,6 +68,6 @@ public abstract class TileEntityTransferNodeBase<T extends BaseNodeLogic> extend
 
     public void dropInventoryContents()
     {
-        getLogic().dropContents();
+        getLogic().dropContents(worldObj, xCoord, yCoord, zCoord);
     }
 }

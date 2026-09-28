@@ -2,14 +2,20 @@ package com.fouristhenumber.utilitiesinexcess.transfer.upgrade;
 
 import codechicken.lib.data.MCDataInput;
 import codechicken.lib.data.MCDataOutput;
+
 import com.cleanroommc.modularui.widgets.slot.IOnSlotChanged;
+
 import com.fouristhenumber.utilitiesinexcess.common.items.ItemUpgrade;
 import com.fouristhenumber.utilitiesinexcess.utils.ItemStackInventory;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.world.World;
+
+import static com.fouristhenumber.utilitiesinexcess.utils.InventoryUtils.dropStack;
 
 public class UpgradeInventory implements IOnSlotChanged, IInventory
 {
@@ -168,5 +174,18 @@ public class UpgradeInventory implements IOnSlotChanged, IInventory
     public boolean isItemValidForSlot(int index, ItemStack stack)
     {
         return stack.getItem() instanceof ItemUpgrade;
+    }
+
+    public void dropContents(World world, int x, int y, int z)
+    {
+        for (ItemStack stack : upgrades)
+        {
+            if (stack == null || stack.stackSize <= 0)
+            {
+                continue;
+            }
+
+            dropStack(world, x, y, z, stack);
+        }
     }
 }

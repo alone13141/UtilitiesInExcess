@@ -1,23 +1,6 @@
 package com.fouristhenumber.utilitiesinexcess.transfer.SharedTransferLogic;
 
-import com.cleanroommc.modularui.api.drawable.IKey;
-import com.cleanroommc.modularui.factory.PosGuiData;
-import com.cleanroommc.modularui.screen.ModularPanel;
-import com.cleanroommc.modularui.screen.ModularScreen;
-import com.cleanroommc.modularui.screen.UISettings;
-import com.cleanroommc.modularui.utils.item.IItemHandler;
-import com.cleanroommc.modularui.utils.item.InvWrapper;
-import com.cleanroommc.modularui.value.sync.PanelSyncManager;
-import com.cleanroommc.modularui.value.sync.StringSyncValue;
-import com.cleanroommc.modularui.widget.ParentWidget;
-import com.cleanroommc.modularui.widgets.layout.Flow;
-import com.cleanroommc.modularui.widgets.layout.Grid;
-import com.cleanroommc.modularui.widgets.slot.ItemSlot;
-import com.cleanroommc.modularui.widgets.slot.ModularSlot;
-import com.cleanroommc.modularui.widgets.slot.SlotGroup;
-import com.fouristhenumber.utilitiesinexcess.UtilitiesInExcess;
 import com.fouristhenumber.utilitiesinexcess.common.items.ItemUpgrade;
-import com.fouristhenumber.utilitiesinexcess.common.tileentities.transfer.TileEntityItemRetrievalNode;
 import com.fouristhenumber.utilitiesinexcess.transfer.upgrade.AdvancedFilterMode;
 import com.fouristhenumber.utilitiesinexcess.transfer.walk.ItemWalker;
 import com.fouristhenumber.utilitiesinexcess.transfer.walk.stepper.BFSStepper;
@@ -26,14 +9,13 @@ import com.fouristhenumber.utilitiesinexcess.transfer.walk.stepper.RandomStepper
 import com.fouristhenumber.utilitiesinexcess.transfer.walk.targeting.TargetResolver;
 import com.fouristhenumber.utilitiesinexcess.utils.ItemStackInventory;
 import com.fouristhenumber.utilitiesinexcess.utils.filter.ItemFilter;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.StatCollector;
+
 import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.List;
@@ -45,9 +27,6 @@ import static com.fouristhenumber.utilitiesinexcess.transfer.walk.insertion.Base
 
 public class ItemRetrievalNodeLogic extends BaseItemTransferNodeLogic<IWalkingComponent> implements IInventory
 {
-    ItemStack buffer;
-    IInventory connectedInventory;
-
     // Upgrades
     private boolean isRoundRobin = false;
     private ItemFilter logicalFilter;
@@ -83,11 +62,8 @@ public class ItemRetrievalNodeLogic extends BaseItemTransferNodeLogic<IWalkingCo
         int actionsThisTick = actionsThisTick();
         for (int i = 0; i < actionsThisTick; i ++)
         {
-            if (connectedInventory == null)
-            {
-                updateConnectedInventory();
-            }
-            else
+            updateSourceInventory();
+            if (connectedInventory != null)
             {
                 exportToConnected();
             }
@@ -284,6 +260,10 @@ public class ItemRetrievalNodeLogic extends BaseItemTransferNodeLogic<IWalkingCo
         TileEntity neighbor = host.getWorld().getTileEntity(host.getX() + facing.offsetX, host.getY() + facing.offsetY, host.getZ() + facing.offsetZ);
         if (neighbor instanceof IInventory inventory) {
             connectedInventory = inventory;
+        }
+        else
+        {
+            connectedInventory = null;
         }
     }
 

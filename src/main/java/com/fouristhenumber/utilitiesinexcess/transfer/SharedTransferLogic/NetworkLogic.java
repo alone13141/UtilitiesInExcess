@@ -17,6 +17,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.IFluidHandler;
 
@@ -31,7 +32,7 @@ public abstract class NetworkLogic<T extends ITransferNetworkComponent>
         this.host = host;
     }
 
-    // TODO Move this somewhere else.
+    // TODO Move this somewhere else?
     public static boolean isValidConnectable(IBlockAccess world, int x, int y, int z, ForgeDirection dir)
     {
         boolean connects;
@@ -48,6 +49,10 @@ public abstract class NetworkLogic<T extends ITransferNetworkComponent>
         }
         return connects;
     }
+
+    // Doesn't need to be abstract because some transfer TE's don't have contents, but we do want it here
+    // because then it's easier to access from parts.
+    public void dropContents(World world, int x, int y, int z) {}
 
     public abstract void writeToNBT(NBTTagCompound nbt);
 

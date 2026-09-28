@@ -2,38 +2,35 @@ package com.fouristhenumber.utilitiesinexcess.compat.ForgeMultipart.multipart.Tr
 
 import codechicken.lib.data.MCDataOutput;
 import codechicken.lib.vec.Cuboid6;
-import codechicken.multipart.ISBRHPart;
 import codechicken.multipart.JNormalOcclusion;
 import codechicken.multipart.JPartialOcclusion;
 import codechicken.multipart.JsonModeledPart;
 import codechicken.multipart.TMultiPart;
+
 import com.fouristhenumber.utilitiesinexcess.common.blocks.transfer.IConnectable;
 import com.fouristhenumber.utilitiesinexcess.common.tileentities.transfer.ITransferNetworkComponent;
 import com.fouristhenumber.utilitiesinexcess.compat.ForgeMultipart.multipart.UiEMultipart;
-import com.fouristhenumber.utilitiesinexcess.compat.ForgeMultipart.multipart.UiEMultipartMaterialItem;
 import com.fouristhenumber.utilitiesinexcess.compat.ForgeMultipart.render.BlockMetaOverrideWorld;
 import com.fouristhenumber.utilitiesinexcess.compat.ForgeMultipart.render.MetaOverrideWorld;
 import com.fouristhenumber.utilitiesinexcess.transfer.collision.PipeCollision;
 import com.fouristhenumber.utilitiesinexcess.transfer.walk.insertion.BaseInserter;
 import com.fouristhenumber.utilitiesinexcess.transfer.walk.insertion.DefaultInserter;
+
 import com.gtnewhorizon.gtnhlib.client.model.ModelISBRH;
-import cpw.mods.fml.client.registry.RenderingRegistry;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.src.FMLRenderAccessLibrary;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.Collections;
 
 public abstract class NetworkComponentBasePart extends UiEMultipart implements ITransferNetworkComponent, IConnectable, JsonModeledPart, JNormalOcclusion
 {
@@ -165,12 +162,6 @@ public abstract class NetworkComponentBasePart extends UiEMultipart implements I
     public ItemStack pickItem(MovingObjectPosition hit)
     {
         return new ItemStack(Item.getItemFromBlock(getBlock()), 1, meta);
-    }
-
-    @Override
-    public Iterable<ItemStack> getDrops()
-    {
-        return Collections.singletonList(new ItemStack(Item.getItemFromBlock(getBlock()), 1, meta));
     }
 
     public float getStrength(MovingObjectPosition hit , EntityPlayer player)

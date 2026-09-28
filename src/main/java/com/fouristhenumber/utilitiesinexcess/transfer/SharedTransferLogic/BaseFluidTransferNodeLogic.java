@@ -22,7 +22,8 @@ public abstract class BaseFluidTransferNodeLogic<T extends IWalkingComponent> ex
     public FluidTank buffer = new FluidTank(maxFluidAmount);
 
     public FluidWalker walker;
-    public BaseFluidTransferNodeLogic(T host) {
+    public BaseFluidTransferNodeLogic(T host)
+    {
         super(host);
     }
 

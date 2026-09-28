@@ -37,6 +37,4 @@ public abstract class UiEMultipart extends TMultiPart implements JIconHitEffects
     public void addHitEffects(MovingObjectPosition movingObjectPosition, EffectRenderer renderer) {
         IconHitEffects.addHitEffects(this, movingObjectPosition, renderer);
     }
-
-
 }
